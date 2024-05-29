@@ -1,0 +1,67 @@
+﻿@model IEnumerable<course.Models.Cart>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Корзина</h1>
+<p>
+    <form asp-action="Add" method="post">
+        <input name="id" type="hidden" value="" />
+        <button type="submit" class="btn btn-primary">Заказать</button>
+    </form>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               Название
+            </th>
+            <th>
+                Цена
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                    @Html.DisplayFor(modelItem => item.ProductsHistory.NameP)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.ProductsHistory.price)
+            </td>
+                <td>
+                    @if (User.IsInRole("admin"))
+                    {
+                        <div class="btn-group">
+
+                            <form asp-action="Delails" method="post">
+                                <input name="id" type="hidden" value="@item.ID" />
+                                <button type="submit" class="btn btn-primary">Подробнее</button>
+                            </form>
+                            <form asp-action="Delete" method="post">
+                                <input name="id" type="hidden" value="@item.ID" />
+                                <button type="submit" class="btn btn-primary">Удалить</button>
+                            </form>
+                        </div>
+                    }
+                    @if (User.IsInRole("user"))
+                    {
+                        <div class="btn-group">
+                            <form asp-action="Delails" method="post">
+                                <input name="id" type="hidden" value="@item.ID" />
+                                <button type="submit" class="btn btn-primary">Подробнее</button>
+                            </form>
+                            <form asp-action="Delete" method="post">
+                                <input name="id" type="hidden" value="@item.ID" />
+                                <button type="submit" class="btn btn-primary">Удалить</button>
+                            </form>
+                        </div>
+                    }
+                </td>
+        </tr>
+}
+    </tbody>
+</table>

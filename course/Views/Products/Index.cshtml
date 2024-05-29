@@ -1,0 +1,86 @@
+﻿@model IEnumerable<course.Models.Products>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Продукты</h1>
+
+<p>
+    @if (User.IsInRole("admin"))
+    {
+        <form asp-action="Create">
+            <input name="id" type="hidden" />
+            <button type="submit" class="btn btn-primary">Добавить</button>
+        </form>
+    }
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+            Название  
+            </th>
+            <th>
+            Цена
+            </th>
+             <th>
+              Изображение
+             </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
+            </td>
+            <td>
+                <dd class="col-sm-1">
+                    @if (!string.IsNullOrEmpty(item.image))
+                    {
+
+                        <img src="@item.image" alt="Изображение" class="img-fluid" />
+                    }
+                </dd>
+            </td>
+                <td>
+                    @if (User.IsInRole("admin"))
+                    {
+                        <div class="btn-group">
+                            <form asp-action="Edit" method="post">
+                                <input name="id" type="hidden" value="@item.ID" />
+                                <button type="submit" class="btn btn-primary">Редактировать</button>
+                            </form>
+                            <form asp-action="Details" method="post">
+                                <input name="id" type="hidden" value="@item.ID" />
+                                <button type="submit" class="btn btn-primary">Подробнее</button>
+                            </form>
+                            <form asp-action="Delete" method="post">
+                                <input name="id" type="hidden" value="@item.ID" />
+                                <button type="submit" class="btn btn-primary">Удалить</button>
+                            </form>
+                        </div>
+                    }
+                    @if (User.IsInRole("user"))
+                    {
+                        <div class="btn-group">
+                            <form asp-action="Delails" method="post">
+                                <input name="id" type="hidden" value="@item.ID" />
+                                <button type="submit" class="btn btn-primary">Подробнее</button>
+                            </form>
+                            <form asp-action="Add" method="post">
+                                <input name="id" type="hidden" value="@item.ID" />
+                                <button type="submit" class="btn btn-primary">В&nbsp;корзину</button>
+                            </form>
+                        </div>
+                    }
+                </td>
+        </tr>
+}
+    </tbody>
+</table>

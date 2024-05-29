@@ -1,0 +1,63 @@
+﻿@model course.Models.History
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Создать</h1>
+
+<h4>История заказов</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="userID" class="control-label">Пользователь</label>
+                <input asp-for="userID" class="form-control" />
+                <span asp-validation-for="userID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="quantity" class="control-label">Колличество товара</label>
+                <input asp-for="quantity" class="form-control" />
+                <span asp-validation-for="quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="price" class="control-label">Цена</label>
+                <input asp-for="price" class="form-control" />
+                <span asp-validation-for="price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="orderdate" class="control-label">Дата заказа</label>
+                <input asp-for="orderdate" class="form-control" />
+                <span asp-validation-for="orderdate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="adresscity" class="control-label">Город</label>
+                <input asp-for="adresscity" class="form-control" />
+                <span asp-validation-for="adresscity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="adressstreet" class="control-label">Улица</label>
+                <input asp-for="adressstreet" class="form-control" />
+                <span asp-validation-for="adressstreet" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="adresshome" class="control-label">Дом</label>
+                <input asp-for="adresshome" class="form-control" />
+                <span asp-validation-for="adresshome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Вернуться к списку</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

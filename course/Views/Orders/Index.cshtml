@@ -1,0 +1,193 @@
+﻿@model IEnumerable<course.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Заказы</h1>
+@if (User.IsInRole("admin"))
+{
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Заказчик
+                </th>
+                <th>
+                    Колличество товаров
+                </th>
+                <th>
+                    Общая цена
+                </th>
+                <th>
+                    Дата
+                </th>
+                <th>
+                    Город
+                </th>
+                <th>
+                    Улица
+                </th>
+                <th>
+                    Дом
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.employer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.orderdate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.adresscity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.adressstreet)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.adresshome)
+                    </td>
+                    <td>
+                        @if (User.IsInRole("admin"))
+                        {
+                            <div class="btn-group">
+
+                                <form asp-action="Details" method="post">
+                                    <input name="id" type="hidden" value="@item.ID" />
+                                    <button type="submit" class="btn btn-primary">Подробнее</button>
+                                </form>
+                                <form asp-action="Delete" method="post">
+                                    <input name="id" type="hidden" value="@item.ID" />
+                                    <button type="submit" class="btn btn-primary">Удалить</button>
+                                </form>
+                                <form asp-action="ToHistory" method="post">
+                                    <input name="id" type="hidden" value="@item.ID" />
+                                    <button type="submit" class="btn btn-primary">Завершить</button>
+                                </form>
+                            </div>
+                        }
+                        @if (User.IsInRole("user"))
+                        {
+
+                            <div class="btn-group">
+                                <form asp-action="Delete" method="post">
+                                    <input name="id" type="hidden" value="@item.ID" />
+                                    <button type="submit" class="btn btn-primary">Удалить</button>
+                                </form>
+                                <form asp-action="Details" method="post">
+                                    <input name="id" type="hidden" value="@item.ID" />
+                                    <button type="submit" class="btn btn-primary">Подробнее</button>
+                                </form>
+                            </div>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    }
+@if (User.IsInRole("user"))
+{
+
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th>
+                    Колличество товаров
+                </th>
+                <th>
+                    Общая цена
+                </th>
+                <th>
+                    Дата
+                </th>
+                <th>
+                    Город
+                </th>
+                <th>
+                    Улица
+                </th>
+                <th>
+                    Дом
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.orderdate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.adresscity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.adressstreet)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.adresshome)
+                    </td>
+                    <td>
+                        @if (User.IsInRole("admin"))
+                        {
+                            <div class="btn-group">
+
+                                <form asp-action="Details" method="post">
+                                    <input name="id" type="hidden" value="@item.ID" />
+                                    <button type="submit" class="btn btn-primary">Подробнее</button>
+                                </form>
+                                <form asp-action="Delete" method="post">
+                                    <input name="id" type="hidden" value="@item.ID" />
+                                    <button type="submit" class="btn btn-primary">Удалить</button>
+                                </form>
+                                <form asp-action="ToHistory" method="post">
+                                    <input name="id" type="hidden" value="@item.ID" />
+                                    <button type="submit" class="btn btn-primary">Завершить</button>
+                                </form>
+                            </div>
+                        }
+                        @if (User.IsInRole("user"))
+                        {
+
+                            <div class="btn-group">
+                                <form asp-action="Delete" method="post">
+                                    <input name="id" type="hidden" value="@item.ID" />
+                                    <button type="submit" class="btn btn-primary">Удалить</button>
+                                </form>
+                                <form asp-action="Details" method="post">
+                                    <input name="id" type="hidden" value="@item.ID" />
+                                    <button type="submit" class="btn btn-primary">Подробнее</button>
+                                </form>
+                            </div>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+        
+    </table>
+}
